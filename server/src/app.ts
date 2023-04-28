@@ -27,6 +27,11 @@ class App {
             console.log(`INCOMING -> METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
             next();
         });
+
+        /** Health check */
+        router.get('/ping', (req, res, next) => {
+            res.status(200).json({message: 'pong'})
+        });
         
         /** Error handling */
         router.use((req, res, next) => {
@@ -35,9 +40,6 @@ class App {
                 message: error.message
             });
         });
-
-        /** Health check */
-        router.get('/ping', (req, res, next) => res.status(200).json({message: 'pong'}));
 
         /** adds the router middleware to the Express app */
         this.expressApp.use('/', router);
