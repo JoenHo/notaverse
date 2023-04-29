@@ -1,10 +1,9 @@
-import express from 'express';
-import mongoose from 'mongoose';
 import {config} from './config';
 import {App} from './app';
+import { DataAccess } from './db';
 
 /** Connect to Mongo DB */
-mongoose.connect(config.mongo.url).then(() => {
+DataAccess.connect().then(() => {
     console.log('Connected to MongoDB!')
     startServer();
 }).catch((err) => {
