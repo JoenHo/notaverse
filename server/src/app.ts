@@ -1,5 +1,7 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
+import userRoutes from './routes/UserRoutes';
+import noteRoutes from './routes/NoteRoutes';
 
 class App {
 
@@ -27,6 +29,11 @@ class App {
             console.log(`INCOMING -> METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
             next();
         });
+
+        /** Routes */
+        router.use('/user', userRoutes);
+        router.use('/note', noteRoutes);
+        
 
         /** Health check */
         router.get('/ping', (req, res, next) => {
