@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { Subscription } from "../enums/SubscriptionPlan"
+import { Subscription } from "../enums/Subscription"
 import { INoteModel } from "./INoteModel";
 import { IRoomModel } from "./IRoomModel";
 
