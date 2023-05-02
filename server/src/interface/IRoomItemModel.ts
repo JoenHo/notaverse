@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import { IRoomModel } from "./IRoomModel";
-import { IItemModel } from "./IItemModel";
+import { INoteModel } from "./INoteModel";
 
 interface IRoomItemModel extends mongoose.Document {
     room: IRoomModel;
-    item: IItemModel;
+    item: INoteModel;
     x: number;
     y: number;
 }
