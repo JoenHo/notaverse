@@ -33,17 +33,6 @@ class NoteModel {
     public createModel(): void {
         this.model = mongooseConnection.model<INoteModel>("Note", this.schema);
     }
-
-    /** Update Note content */
-    public updateContent(id: string, newContent: string): void {
-        this.model.findByIdAndUpdate(id, { content: newContent }, (err: any, data: any) => {
-            if (err) {
-                console.log("Fail to update: ", err);
-            } else {
-                console.log("Note updated successfully");
-            }
-        });
-    }
 }
 
 const noteModel = new NoteModel();
