@@ -60,70 +60,6 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
         });
 }
 
-/** Create note for user */
-const createNoteForUser = (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.userId;
-    const noteData = req.body;
-    noteData.user = userId;
-
-    // find user by id
-    userModel.model.findById(userId)
-        .then((user: any) => {
-            if (user) {
-                // create new note obj
-                noteModel.model.create(noteData)
-                    .then((newObj: any) => {
-                        // push note id into itemList
-                        user.itemList.push(newObj._id);
-                        user.save();
-                        // set JSON response
-                        res.status(200).json({ id: newObj._id})
-                    })
-                    .catch((err: any) => {
-                        console.log('Object creation failed');
-                        res.status(500).send(err.message);
-                    })
-            }else{
-                console.log('User not found: ', userId);
-            }   
-        })
-        .catch((err: any) => {
-            console.log('Error creating note:', err);
-            res.status(500).send(err.message);
-        });
-}; 
-
-/** Delete note for user */
-const deleteNoteForUser = (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.userId;
-    const noteId = req.params.noteId;
-
-    // find user by id
-    userModel.model.findById(userId)
-        .then((user: any) => {
-            if (user) {
-                // remove note id from itemList
-                user.itemList.pull(noteId);
-                user.save();
-                // delete note by id
-                noteModel.model.findByIdAndDelete(noteId)
-                    .then(() => {
-                        res.status(200).json({ deletedId: noteId });
-                    })
-                    .catch((err: any) => {
-                        console.log('Deletion failed');
-                        res.status(500).send(err.message);
-                    })
-            } else {
-                console.log('User not found: ', userId);
-            }
-        })
-        .catch((err: any) => {
-            console.log('Error deleting note:', err);
-            res.status(500).send(err.message);
-        });
-}; 
-
 
 /** Define routes */
 const router = express.Router();
@@ -131,7 +67,5 @@ router.get('/', readAll);
 router.get('/:userId', readById);
 router.post('/', createUser);
 router.put('/:userId', updateUser);
-router.put('/createNote/:userId', createNoteForUser)
-router.put('/deleteNote/:userId/:noteId', deleteNoteForUser)
 router.delete('/:userId', deleteUser);
 export = router;

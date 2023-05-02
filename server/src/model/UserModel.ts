@@ -21,7 +21,7 @@ class UserModel {
         this.schema = new Schema({
             username: {type: String, required: true},
             email: {type: String, required: true, unique: true},
-            password: {type: String, required: true, unique: true},
+            password: {type: String, required: true},
             plan: {type: String, enum: Object.values(Subscription), default: Subscription.Basic, required: true},
             roomList: [{type: Schema.Types.ObjectId, ref: 'rooms', required: false}],
             itemList: [{type: Schema.Types.ObjectId, ref: 'notes', required: false}],

@@ -1,6 +1,7 @@
 /** Read Item */
 import express, { NextFunction, Request, Response} from 'express';
 import { noteModel } from '../model/NoteModel';
+import { userModel } from '../model/UserModel';
 
 /** Retrieves all the notes */
 const readAll = (req: Request, res: Response, next: NextFunction) => {
@@ -20,15 +21,35 @@ const readById = (req: Request, res: Response, next: NextFunction) => {
 
 /** Create new note in DB */
 const createNote = (req: Request, res: Response, next: NextFunction) => {
-    var jsonObj = req.body;
-    noteModel.model.create(jsonObj)
-        .then((newObj: any) => {
-            res.status(200).json({ id: newObj._id})
+    var userId = req.params.userId;
+    var noteData = req.body;
+    noteData.user = userId;
+
+    // find user by id
+    userModel.model.findById(userId)
+        .then((user: any) => {
+            if (user) {
+                // create new note obj
+                noteModel.model.create(noteData)
+                    .then((newObj: any) => {
+                        // push note id into itemList
+                        user.itemList.push(newObj._id);
+                        user.save();
+                        // set JSON response
+                        res.status(200).json({ id: newObj._id})
+                    })
+                    .catch((err: any) => {
+                        console.log('Object creation failed');
+                        res.status(500).send(err.message);
+                    })
+            }else{
+                console.log('User not found: ', userId);
+            }   
         })
         .catch((err: any) => {
-            console.log('Object creation failed');
+            console.log('Error creating note:', err);
             res.status(500).send(err.message);
-        })
+        });
 }
 
 /** Update note by ID */
@@ -48,14 +69,30 @@ const updateNote = (req: Request, res: Response, next: NextFunction) => {
 
 /** Delete note by ID */
 const deleteNote = (req: Request, res: Response, next: NextFunction) => {
-    const id = req.params.noteId;
-    noteModel.model.findByIdAndDelete(id)
-        .then(() => {
-            console.log("Note deleted successfully")
-            res.status(200).json({ deletedId: id});
+    const userId = req.params.userId;
+    const noteId = req.params.noteId;
+
+    userModel.model.findById(userId)
+        .then((user: any) => {
+            if (user) {
+                // remove note id from itemList
+                user.itemList.pull(noteId);
+                user.save();
+                // delete note by id
+                noteModel.model.findByIdAndDelete(noteId)
+                    .then(() => {
+                        res.status(200).json({ deletedId: noteId });
+                    })
+                    .catch((err: any) => {
+                        console.log('Deletion failed');
+                        res.status(500).send(err.message);
+                    })
+            } else {
+                console.log('User not found: ', userId);
+            }
         })
         .catch((err: any) => {
-            console.log('Deletion failed');
+            console.log('Error deleting note:', err);
             res.status(500).send(err.message);
         });
 }
@@ -64,7 +101,7 @@ const deleteNote = (req: Request, res: Response, next: NextFunction) => {
 const router = express.Router();
 router.get('/', readAll);
 router.get('/:noteId', readById);
-router.post('/', createNote);
+router.post('/:userId', createNote);
 router.put('/:noteId', updateNote);
-router.delete('/:noteId', deleteNote);
+router.delete('/:userId/:noteId', deleteNote);
 export = router;
