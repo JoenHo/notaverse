@@ -4,11 +4,10 @@ import { INoteModel } from "./INoteModel";
 import { IRoomModel } from "./IRoomModel";
 
 interface IUserModel extends mongoose.Document {
+    userId: string;
     username: string;
-    email: string;
-    password: string;
     plan: Subscription;
-    roomList: Array<IRoomModel>;
-    itemList: Array<INoteModel>;
+    roomIdList: Array<IRoomModel['roomId']>;
+    noteIdList: Array<INoteModel['noteId']>;
 }
 export {IUserModel}

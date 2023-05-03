@@ -18,10 +18,11 @@ class NoteModel {
     /** Create Schema */
     public createSchema(): void {
         this.schema = new Schema({
+            noteId: {type: String, required: true, unique: true, alias: 'id'},
             title: { type: String, required: true, default: 'Untitled' },
             img_url: { type: String, required: true },
             content: { type: String, required: true, default: '' },
-            user: { type: Schema.Types.ObjectId, ref: 'users', required: true},
+            userId: { type: String, required: true},
         }, 
         {
             timestamps: true,

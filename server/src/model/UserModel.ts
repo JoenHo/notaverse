@@ -19,12 +19,11 @@ class UserModel {
     /** Create Schema */
     public createSchema(): void {
         this.schema = new Schema({
-            username: {type: String, required: true},
-            email: {type: String, required: true, unique: true},
-            password: {type: String, required: true},
+            userId: {type: String, required: true, unique: true, alias: 'id'},
+            username: {type: String, required: true, unique: true},
             plan: {type: String, enum: Object.values(Subscription), default: Subscription.Basic, required: true},
-            roomList: [{type: Schema.Types.ObjectId, ref: 'rooms', required: false}],
-            itemList: [{type: Schema.Types.ObjectId, ref: 'notes', required: false}],
+            roomIdList: [{type: String, required: false}],
+            noteIdList: [{type: String, required: false}],
         }, {collection: 'users'});
     }
 

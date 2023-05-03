@@ -2,48 +2,50 @@
 import express, { NextFunction, Request, Response} from 'express';
 import { noteModel } from '../model/NoteModel';
 import { userModel } from '../model/UserModel';
+import crypto from 'crypto';
 
 /** Retrieves all the notes */
 const readAll = (req: Request, res: Response, next: NextFunction) => {
-    return noteModel.model.find()
-        .then((data: any) => res.status(200).json({ data }))
-        .catch((err: any) => res.status(500).json( err ));
+    noteModel.model.find()
+        .then((data: any) => res.status(200).json(data))
+        .catch((err: any) => res.status(500).json(err));
 }
 
 /** Retrieves one note by ID */
 const readById = (req: Request, res: Response, next: NextFunction) => {
     var id = req.params.noteId;
-    console.log('Query single Note with id: ' + id);
-    return noteModel.model.findById(id)
-        .then((data: any) => res.status(200).json({ data }))
-        .catch((err: any) => res.status(500).json( err ));
+    noteModel.model.findOne({noteId: id})
+        .then((data: any) => res.status(200).json(data))
+        .catch((err: any) => res.status(500).json(err));
 }
 
 /** Create new note in DB */
 const createNote = (req: Request, res: Response, next: NextFunction) => {
-    var userId = req.params.userId;
-    var noteData = req.body;
-    noteData.user = userId;
-
-    // find user by id
-    userModel.model.findById(userId)
+    var user_id = req.params.userId;
+    // find user
+    userModel.model.findOne({userId: user_id})
         .then((user: any) => {
             if (user) {
+                // prepare content of note obj
+                var noteData = req.body;
+                noteData.id = crypto.randomUUID();
+                noteData.userId = user.userId;
                 // create new note obj
                 noteModel.model.create(noteData)
                     .then((newObj: any) => {
-                        // push note id into itemList
-                        user.itemList.push(newObj._id);
+                        // push note into itemList
+                        user.noteIdList.push(newObj?.noteId);
                         user.save();
-                        // set JSON response
-                        res.status(200).json({ id: newObj._id})
+                        // set response
+                        res.status(200).json(newObj);
                     })
                     .catch((err: any) => {
                         console.log('Object creation failed');
                         res.status(500).send(err.message);
                     })
             }else{
-                console.log('User not found: ', userId);
+                console.log('User not found: ', user_id);
+                res.status(500).send("User not found");
             }   
         })
         .catch((err: any) => {
@@ -54,48 +56,58 @@ const createNote = (req: Request, res: Response, next: NextFunction) => {
 
 /** Update note by ID */
 const updateNote = (req: Request, res: Response, next: NextFunction) => {
-    const id = req.params.noteId;
-    const updatedObj = req.body;
-    noteModel.model.findByIdAndUpdate(id, updatedObj, { new: true })
+    var id = req.params.noteId;
+    var updatedObj = req.body;
+    noteModel.model.findOneAndUpdate({noteId: id}, updatedObj, { new: true })
         .then((updatedObj: any) => {
-            console.log("Note updated successfully");
-            res.status(200).json(updatedObj);
+            if(updatedObj){
+                res.status(200).json(updatedObj);
+            }else{
+                res.status(500).json('Note not found');
+            }
         })
         .catch((err: any) => {
             console.log('Update failed');
-            res.status(500).send(err.message);
+            res.status(500).json(err);
         });
 }
 
 /** Delete note by ID */
 const deleteNote = (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.userId;
-    const noteId = req.params.noteId;
+    var id = req.params.noteId;
 
-    userModel.model.findById(userId)
-        .then((user: any) => {
-            if (user) {
-                // remove note id from itemList
-                user.itemList.pull(noteId);
-                user.save();
-                // delete note by id
-                noteModel.model.findByIdAndDelete(noteId)
-                    .then(() => {
-                        res.status(200).json({ deletedId: noteId });
-                    })
-                    .catch((err: any) => {
-                        console.log('Deletion failed');
-                        res.status(500).send(err.message);
-                    })
-            } else {
-                console.log('User not found: ', userId);
+    // find note
+    noteModel.model.findOne({noteId: id})
+        .then((noteData: any) => {
+            // find user and delete noteId from noteIdList
+            userModel.model.findOne({userId: noteData.userId})
+            .then((user: any) => {
+                if (user) {
+                    // remove note from noteIdList
+                    user.noteIdList.pull(noteData.noteId);
+                    user.save();
+                }
+            })
+        })
+        .catch((err: any) => {
+            return res.status(500).json(err.message);
+        });
+    
+    // delete note
+    noteModel.model.findOneAndDelete({noteId: id})
+        .then((data: any) => {
+            if(data){
+                res.status(200).json({ deletedNoteId: id});
+            }else{
+                res.status(500).send("Note not found");
             }
         })
         .catch((err: any) => {
-            console.log('Error deleting note:', err);
-            res.status(500).send(err.message);
-        });
+            console.log('Deletion failed');
+            res.status(500).json(err);
+        })
 }
+
 
 /** Define routes */
 const router = express.Router();
@@ -103,5 +115,5 @@ router.get('/', readAll);
 router.get('/:noteId', readById);
 router.post('/:userId', createNote);
 router.put('/:noteId', updateNote);
-router.delete('/:userId/:noteId', deleteNote);
+router.delete('/:noteId', deleteNote);
 export = router;
