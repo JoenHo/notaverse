@@ -7,12 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { ContainerComponent } from './components/container/container.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
-    SidenavComponent
+    SidenavComponent,
+    HomeComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
