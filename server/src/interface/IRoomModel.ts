@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
-import { IRoomItemModel } from "./IRoomItemModel";
-import { IUserModel } from "./IUserModel";
 
 interface IRoomModel extends mongoose.Document {
-    roomId: string;
+    roomId: string;  // PK
     name: string;
-    roomItemIdList: Array<IRoomItemModel['roomItemId']>;
-    userId: IUserModel['userId'];
+    roomItemIdList: Array<string>;  // for storing IRoomItemModel['roomItemId']
+    userId: string; // for storing IUserModel['userId']
 }
 export {IRoomModel}
