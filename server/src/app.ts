@@ -2,6 +2,8 @@ import express from 'express';
 import * as bodyParser from 'body-parser';
 import userRoutes from './routes/UserRoutes';
 import noteRoutes from './routes/NoteRoutes';
+import roomRoutes from './routes/RoomRoutes';
+import roomItemRoutes from './routes/RoomItemRoutes';
 
 class App {
 
@@ -33,7 +35,8 @@ class App {
         /** Routes */
         router.use('/user', userRoutes);
         router.use('/note', noteRoutes);
-        
+        router.use('/room', roomRoutes);
+        router.use('/roomItem', roomItemRoutes);
 
         /** Health check */
         router.get('/ping', (req, res, next) => {
