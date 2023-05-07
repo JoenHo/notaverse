@@ -1,13 +1,11 @@
 import mongoose from "mongoose"
 import { Subscription } from "../enums/Subscription"
-import { INoteModel } from "./INoteModel";
-import { IRoomModel } from "./IRoomModel";
 
 interface IUserModel extends mongoose.Document {
-    userId: string;
+    userId: string;  // PK
     username: string;
     plan: Subscription;
-    roomIdList: Array<IRoomModel['roomId']>;
-    noteIdList: Array<INoteModel['noteId']>;
+    roomIdList: Array<string>; // for storing IRoomModel['roomId']
+    noteIdList: Array<string>; // for storing INoteModel['noteId']
 }
 export {IUserModel}

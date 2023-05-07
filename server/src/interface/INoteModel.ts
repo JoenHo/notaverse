@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-import { IUserModel } from "./IUserModel";
 
 interface INoteModel extends mongoose.Document {
-    noteId: string;
+    noteId: string; // PK
     title: string;
     img_url: string;
     content: string;
-    user: IUserModel['userId'];
+    userId: string; // for storing IUserModel['userId']
 }
 export {INoteModel}
