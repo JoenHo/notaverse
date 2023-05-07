@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { IRoomModel } from "./IRoomModel";
-import { INoteModel } from "./INoteModel";
+import { ElementType } from "../enums/ElementType"
 
 interface IRoomItemModel extends mongoose.Document {
-    roomItemId: string;
-    roomId: IRoomModel['roomId'];
-    itemId: INoteModel['noteId'];
+    roomItemId: string;  // PK
+    roomId: string;   // for storing IRoomModel['roomId']
+    itemId: string;   // for storing item ID such as INoteModel['noteId']
+    elementType: ElementType,
     x: number;
     y: number;
 }

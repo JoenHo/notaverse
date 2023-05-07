@@ -1,6 +1,8 @@
 import express, { NextFunction, Request, Response} from 'express';
 import { userController } from '../controllers/UserController';
 import { noteController } from '../controllers/NoteController';
+import { roomController } from '../controllers/RoomController';
+import { roomItemController } from '../controllers/RoomItemController';
 import crypto from 'crypto';
 
 /** Retrieves all the users */
@@ -63,8 +65,30 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
                         console.log('Failed to delete note: ', note_id);
                     });
             });
+            // delete all rooms and roomItems associated with this user
+            const deleteRoomItemsPromise = user.roomIdList.map((room_id: any) => {
+                return roomController.findById(room_id)
+                    .then((room: any) => {
+                        room.roomItemIdList.map((roomItem_id: any) => {
+                            roomItemController.deleteById(roomItem_id)
+                                .then((result: any) => {
+                                }).catch((err: any) => {
+                                    console.log('Failed to delete roomItem: ', roomItem_id);
+                                });
+                        })        
+                    }).catch((err: any) => {
+                        console.log('Failed to find room: ', room_id);
+                    });
+            });
+            const deleteRoomPromise = user.roomIdList.map((room_id: any) => {
+                return roomController.deleteById(room_id)
+                    .then((room: any) => {   
+                    }).catch((err: any) => {
+                        console.log('Failed to delete room: ', room_id);
+                    });
+            });
             // delete user only after deleting all items
-            Promise.all(deleteNotePromises)
+            Promise.all([deleteNotePromises,deleteRoomItemsPromise, deleteRoomPromise])
                 .then(() => {
                     userController.deleteById(req_id)
                         .then((data: any) => {
