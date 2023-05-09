@@ -1,5 +1,6 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
+import cors from 'cors';
 import userRoutes from './routes/UserRoutes';
 import noteRoutes from './routes/NoteRoutes';
 import roomRoutes from './routes/RoomRoutes';
@@ -20,6 +21,7 @@ class App {
     private middleware(): void {
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+        this.expressApp.use(cors());
     }
 
     /** Configure API endpoints */
