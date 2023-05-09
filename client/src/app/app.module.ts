@@ -9,6 +9,8 @@ import { ContainerComponent } from './components/container/container.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
+import { UserService } from './services/user.service';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { NavComponent } from './components/nav/nav.component';
     ContainerComponent,
     SidenavComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { NavComponent } from './components/nav/nav.component';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
