@@ -10,11 +10,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { UserService } from './services/user.service';
 import { LoginComponent } from './pages/login/login.component';
+import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
+    SidenavContentComponent,
     HomeComponent,
     NavComponent,
     LoginComponent
