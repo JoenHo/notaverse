@@ -1,0 +1,41 @@
+<div class="sidenav-content">
+    <div class="room-list" *ngIf="activeTab==='room'">
+      <h3>Rooms</h3>
+      <p *ngIf="rooms?.length===0">No rooms</p>
+      <div class="room-boxes">
+        <div *ngFor="let room of rooms">
+            <div class="room-box">{{room?.name}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-list" *ngIf="activeTab==='element'">
+        <h3>Elements</h3>
+        <div class="element-boxes">
+          <div *ngFor="let element of elements">
+            <div class="element-box" [style.background-image]="'url(' + element?.img_url + ')'">
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="item-list" *ngIf="activeTab==='item'">
+      <h3>Notes</h3>
+      <p *ngIf="notes?.length===0">No notes</p>
+      <div class="note-boxes">
+        <div *ngFor="let note of notes">
+            <div class="note-box">
+                <div class="note-header">
+                    <div class="note-img" [style.background-image]="'url(' + note?.img_url + ')'"></div>
+                    <div class="note-title">{{note?.title}}</div>
+                </div>
+                <div class="note-content">
+                    {{ note?.content | slice:0:135 }}
+                    <span *ngIf="note?.content.length > 135">...</span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+  
