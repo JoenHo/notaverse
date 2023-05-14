@@ -8,9 +8,13 @@ import { MaterialModule } from './modules/material/material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
-import { UserService } from './services/user.service';
 import { LoginComponent } from './pages/login/login.component';
 import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
+import { RoomComponent } from './components/room/room.component';
+import { UserService } from './services/user.service';
+import { RoomService } from './services/room.service';
+import { ElementService } from './services/element.service';
+import { NoteService } from './services/note.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import { SidenavContentComponent } from './components/sidenav-content/sidenav-co
     SidenavContentComponent,
     HomeComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,12 @@ import { SidenavContentComponent } from './components/sidenav-content/sidenav-co
     MaterialModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    RoomService,
+    ElementService,
+    NoteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
