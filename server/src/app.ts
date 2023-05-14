@@ -5,6 +5,7 @@ import userRoutes from './routes/UserRoutes';
 import noteRoutes from './routes/NoteRoutes';
 import roomRoutes from './routes/RoomRoutes';
 import roomItemRoutes from './routes/RoomItemRoutes';
+import elementRoutes from './routes/ElementRoutes';
 
 class App {
 
@@ -39,6 +40,7 @@ class App {
         router.use('/note', noteRoutes);
         router.use('/room', roomRoutes);
         router.use('/roomItem', roomItemRoutes);
+        router.use('/element', elementRoutes);
 
         /** Health check */
         router.get('/ping', (req, res, next) => {
