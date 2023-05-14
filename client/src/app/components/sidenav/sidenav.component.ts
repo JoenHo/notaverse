@@ -1,45 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent {
-  drawerOpen = false;
-  drawerContent = '';
-  activeButton = 0; // 1: user, 2: rooms, 3: elements, 4:items
+export class SidenavComponent implements OnInit {
+  @Input() id: string = ''; // userID
 
-  toggleDrawer(button_no: number) {
+  drawerOpen = false;
+  activeTab = '';
+  userInfo = {};
+
+  /** Constructor */
+  constructor(private userService : UserService) {}
+
+  /** OnInit hook */
+  ngOnInit() {}
+
+  /** Toggle Function */
+  toggleDrawer(tab: string) {
 
     // set status for drawerOpen
-    if (this.activeButton == button_no){
+    if (this.activeTab == tab){
       this.drawerOpen = !this.drawerOpen;
     } else {
       this.drawerOpen = true;
     }
 
-    // set active button_no
+    // set active tab
     if (this.drawerOpen) {
-      this.activeButton = button_no;
+      this.activeTab = tab;
     } else {
-      this.activeButton = 0;
+      this.activeTab = '';
     }
 
-    // set drawer contents according to the active button
-    switch (button_no) {
-      case 1:
-        this.drawerContent = "SHOW ACCOUNT INFO";
-        break;
-      case 2:
-        this.drawerContent = "SHOW ROOMS";
-        break;
-      case 3:
-        this.drawerContent = "SHOW ELEMENTS";
-        break;
-      case 4:
-        this.drawerContent = "SHOW ITEMS";
-        break;
-    }
   }
 }

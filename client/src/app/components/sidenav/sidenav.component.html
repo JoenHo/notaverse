@@ -2,23 +2,23 @@
 <div>
   <div class="sidebar-container">
     <div class="sidenav-button-grp" autosize>
-      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer(1)" [class.active]="activeButton === 1">
+      <!-- <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('user')" [class.active]="activeTab === 'user'">
         <mat-icon class="icon-display" aria-label="USER">insert_emoticon</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer(2)" [class.active]="activeButton === 2">
+      </mat-button-toggle> -->
+      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('room')" [class.active]="activeTab === 'room'">
         <mat-icon class="icon-display" aria-label="ROOMS">settings_overscan</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer(3)" [class.active]="activeButton === 3">
+      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('element')" [class.active]="activeTab === 'element'">
         <mat-icon class="icon-display" aria-label="ELEMENTS">extension</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer(4)" [class.active]="activeButton === 4">
+      <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('item')" [class.active]="activeTab === 'item'">
         <mat-icon class="icon-display" aria-label="ITEMS">folder_open</mat-icon>
       </mat-button-toggle>
     </div>
 
     <mat-drawer-container>
       <mat-drawer class="sidebar" mode="side" [opened]="drawerOpen">
-        <div class="sidenav-content">{{ drawerContent }}</div>
+        <app-sidenav-content [activeTab]="activeTab" [id]="id"></app-sidenav-content>
       </mat-drawer>
     </mat-drawer-container>
   </div>
