@@ -1,4 +1,7 @@
 <div class="home-container">
-    <app-nav></app-nav>
-    <app-sidenav></app-sidenav>
+    <app-nav [id]="id"></app-nav>
+    <div class="home-main-container">
+        <app-sidenav [id]='id'></app-sidenav>
+        <app-room></app-room>
+    </div>
 </div>
