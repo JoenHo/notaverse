@@ -15,6 +15,7 @@ import { UserService } from './services/user.service';
 import { RoomService } from './services/room.service';
 import { ElementService } from './services/element.service';
 import { NoteService } from './services/note.service';
+import { PriceComponent } from './pages/price/price.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NoteService } from './services/note.service';
     HomeComponent,
     NavComponent,
     LoginComponent,
-    RoomComponent
+    RoomComponent,
+    PriceComponent
   ],
   imports: [
     BrowserModule,
