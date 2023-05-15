@@ -42,6 +42,9 @@ class App {
         router.use('/roomItem', roomItemRoutes);
         router.use('/element', elementRoutes);
 
+        /** Set static routes */
+        router.use('/assets', express.static(__dirname + '/assets/element_imgs'));
+
         /** Health check */
         router.get('/ping', (req, res, next) => {
             res.status(200).json({message: 'pong'})
