@@ -19,6 +19,7 @@ export class SidenavContentComponent implements OnInit{
   rooms: any = [];
   roomItems: any = [];
   elements: any = [];
+  img_url_base: string = this.elementService.assets_url;
 
   /** Constructor */
   constructor(
