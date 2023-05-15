@@ -1,0 +1,16 @@
+[{
+  "userId": "42ab8ffd-2367-44fd-9568-87a19134053a",
+  "username": "tamago",
+  "plan": "Basic",
+  "roomIdList": [
+    "ff374908-74f0-4975-bf2b-d798f8892060",
+    "0eeb9d1c-665d-453f-ae76-ca4d254e0e2e"
+  ],
+  "noteIdList": [
+    "1fff520d-e273-4a41-9c54-a203d808bb51",
+    "f0ecb913-10c3-4330-9b8e-a65399249a92",
+    "3438bedf-29fa-49c8-aaeb-8cb7f555c4e4",
+    "07b47b9e-b554-4ccb-814b-14268f429bda",
+    "70634ed4-c8be-43d8-b379-7f8775fd48d4"
+  ]
+}]
