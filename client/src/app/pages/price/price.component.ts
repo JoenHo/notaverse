@@ -15,26 +15,20 @@ export class PriceComponent {
   plans: Plan[] = [
     {
       name: 'Basic',
-      price: 9.99,
-      features: ['Unlimited notes', 'Basic support'],
+      price: 0,
+      features: ['Limited notes', 'Basic support'],
     },
     {
       name: 'Premium',
-      price: 19.99,
-      features: [
-        'Unlimited notes',
-        'Premium support',
-        'Advanced features',
-        'PDF export',
-      ],
+      price: 4.99,
+      features: ['Unlimited notes', 'Premium support', 'Advanced features'],
     },
     {
       name: 'Business',
-      price: 99.99,
+      price: 19.99,
       features: [
         'Unlimited notes',
-        'Dedicated account manager',
-        'Enterprise-grade security',
+        'PDF export',
         'Team collaboration',
         'Analytics and reporting',
       ],
