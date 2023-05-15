@@ -1,6 +1,15 @@
-<div class="price-container">
-    <app-nav></app-nav>
-    <div class="price-page">
-        <div>Edit Price Page Here</div>
+<app-nav></app-nav>
+<div class="price-plans">
+  <div class="price-plan" *ngFor="let plan of plans">
+    <div class="plan-details">
+      <h2 class="plan-name">{{ plan.name }}</h2>
+      <p class="plan-price">{{ plan.price | currency }}</p>
+      <ul class="plan-features">
+        <li *ngFor="let feature of plan.features">{{ feature }}</li>
+      </ul>
     </div>
+    <button class="subscribe-button" (click)="subscribe(plan.name)">
+      Subscribe
+    </button>
+  </div>
 </div>
