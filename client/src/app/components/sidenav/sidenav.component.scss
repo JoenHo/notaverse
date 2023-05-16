@@ -9,7 +9,7 @@
   align-items: center;
   align-content: center;
   width: 70px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background: #2c2929;
   border-right: 2px solid #4d4c4c;
 }
@@ -36,7 +36,7 @@
 
 .sidebar {
   width: 400px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: #333333;
   padding: 0px;
   transition: transform 0.5s ease-in-out;
