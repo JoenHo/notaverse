@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const SERVER_URL = 'http://localhost:3000';
 
@@ -8,14 +8,14 @@ const SERVER_URL = 'http://localhost:3000';
   providedIn: 'root'
 })
 export class NoteService {
+  private selectedNoteSubject = new BehaviorSubject<any>(null);
   notes: any;
-  current_note: any;
+  active_note: any = this.selectedNoteSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  setCurrentNote(id: string) : Observable<any> {
-    this.current_note = this.getNoteById(id);
-    return this.current_note;
+  setActiveNote(note: any) {
+    this.selectedNoteSubject.next(note);
   }
 
   getNoteById(id: string) : Observable<any> {
