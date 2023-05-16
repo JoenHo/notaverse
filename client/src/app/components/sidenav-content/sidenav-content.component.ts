@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { RoomService } from '../../services/room.service';
-import { RoomItemService } from '../../services/room-item.service';
 import { NoteService } from '../../services/note.service';
 import { ElementService } from '../../services/element.service';
 
@@ -17,15 +16,15 @@ export class SidenavContentComponent implements OnInit{
   user: any = {};
   notes: any = [];
   rooms: any = [];
-  roomItems: any = [];
   elements: any = [];
+  active_room: string = '';
+  active_note: string = '';
   img_url_base: string = this.elementService.assets_url;
 
   /** Constructor */
   constructor(
     private userService: UserService,
     private roomService: RoomService,
-    private roomItemService: RoomItemService,
     private noteService: NoteService,
     private elementService: ElementService
   ) {}
@@ -79,4 +78,17 @@ export class SidenavContentComponent implements OnInit{
       this.user = data;
     });        
   }
+
+  /** set active room */
+  onRoomClick(room: any) {
+    this.roomService.setActiveRoom(room);
+    this.active_room = room.roomId;
+  }
+
+  /** set active note */
+  onNoteClick(note: any) {
+    this.noteService.setActiveNote(note);
+    this.active_note = note.noteId;
+  }
+
 }

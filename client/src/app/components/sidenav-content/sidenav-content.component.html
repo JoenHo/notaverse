@@ -4,7 +4,7 @@
       <p *ngIf="rooms?.length===0">No rooms</p>
       <div class="room-boxes">
         <div *ngFor="let room of rooms">
-            <div class="room-box">{{room?.name}}</div>
+            <div class="room-box" (click)="onRoomClick(room)" [class.active]="active_room === room?.roomId">{{room?.name}}</div>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <p *ngIf="notes?.length===0">No notes</p>
       <div class="note-boxes">
         <div *ngFor="let note of notes">
-            <div class="note-box">
+            <div class="note-box" (click)="onNoteClick(note)" [class.active]="active_note === note?.noteId">
                 <div class="note-header">
                     <div class="note-img" [style.background-image]="'url(' + img_url_base + note?.img_url + ')'"></div>
                     <div class="note-title">{{note?.title}}</div>

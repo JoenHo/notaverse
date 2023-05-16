@@ -16,6 +16,11 @@
     cursor: pointer;
 }
 
+.room-box.active {
+    border: solid 2px #ad81cf;
+    background-color: #5d5d5d;
+}
+
 .element-boxes {
     column-count: 3;
     column-gap: 20px;
@@ -45,6 +50,11 @@
     border-radius: 8px;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.note-box.active {
+    border: solid 2px #ad81cf;
+    background-color: #5d5d5d;
 }
 
 .note-header {
