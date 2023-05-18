@@ -8,7 +8,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
-import { LoginComponent } from './pages/login/login.component';
+import { MainComponent } from './pages/main/main.component';
 import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
 import { RoomComponent } from './components/room/room.component';
 import { UserService } from './services/user.service';
@@ -24,9 +24,9 @@ import { PriceComponent } from './pages/price/price.component';
     SidenavContentComponent,
     HomeComponent,
     NavComponent,
-    LoginComponent,
     RoomComponent,
-    PriceComponent
+    PriceComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
