@@ -35,7 +35,7 @@ const create = (obj: any): Promise<any> => {
 
 /** Update by ID */
 const updateById = (id: string, obj: any): Promise<any> => {
-    return noteModel.model.findOneAndUpdate({noteId: id}, obj, { new: true })
+    return noteModel.model.findOneAndUpdate({noteId: id}, obj, { new: true, runValidators: true })
         .then((data: any) => {
             return data;
         })

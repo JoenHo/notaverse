@@ -35,7 +35,7 @@ const create = (obj: any): Promise<any> => {
 
 /** Update by ID */
 const updateById = (id: string, obj: any): Promise<any> => {
-    return roomModel.model.findOneAndUpdate({roomId: id}, obj, { new: true })
+    return roomModel.model.findOneAndUpdate({roomId: id}, obj, { new: true, runValidators: true })
         .then((data: any) => {
             return data;
         })
