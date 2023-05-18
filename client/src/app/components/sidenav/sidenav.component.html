@@ -2,9 +2,6 @@
 <div>
   <div class="sidebar-container">
     <div class="sidenav-button-grp" autosize>
-      <!-- <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('user')" [class.active]="activeTab === 'user'">
-        <mat-icon class="icon-display" aria-label="USER">insert_emoticon</mat-icon>
-      </mat-button-toggle> -->
       <mat-button-toggle class="sidenav-button" (click)="toggleDrawer('room')" [class.active]="activeTab === 'room'">
         <mat-icon class="icon-display" aria-label="ROOMS">settings_overscan</mat-icon>
       </mat-button-toggle>
@@ -18,7 +15,7 @@
 
     <mat-drawer-container>
       <mat-drawer class="sidebar" mode="side" [opened]="drawerOpen">
-        <app-sidenav-content [activeTab]="activeTab" [id]="id"></app-sidenav-content>
+        <app-sidenav-content [activeTab]="activeTab"></app-sidenav-content>
       </mat-drawer>
     </mat-drawer-container>
   </div>

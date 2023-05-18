@@ -6,7 +6,7 @@ import { PriceComponent } from './pages/price/price.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'home/:id', component: HomeComponent },
+  { path: 'home/:userId', component: HomeComponent },
   { path: 'price', component: PriceComponent}
 ];
 

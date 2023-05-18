@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -7,8 +7,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  @Input() id: string = ''; // userID
-  
   user: any;
 
   /** Constructor */
@@ -16,13 +14,10 @@ export class NavComponent implements OnInit {
 
   /** OnInit hook */
   ngOnInit(): void {
-    this.fetchUser()
+    /** Fetch user data */
+    this.userService.getUser()?.subscribe((data: any) => {
+      this.user = data;
+    });
   }
 
-  /** Fetch user data */
-  fetchUser() {
-    return this.userService.getUserById(this.id).subscribe((data: any) => {
-      this.user = data;
-    });        
-  }
 }

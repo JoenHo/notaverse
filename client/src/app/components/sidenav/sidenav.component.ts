@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,14 +6,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-  @Input() id: string = ''; // userID
-
   drawerOpen = false;
   activeTab = '';
   userInfo = {};
 
   /** Constructor */
-  constructor(private userService : UserService) {}
+  constructor() {}
 
   /** OnInit hook */
   ngOnInit() {}

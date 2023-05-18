@@ -20,7 +20,7 @@ export class RoomComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.roomService.active_room.subscribe((room: any) => {
+    this.roomService.getActiveRoom().subscribe((room: any) => {
       this.room = room;
     });
   }

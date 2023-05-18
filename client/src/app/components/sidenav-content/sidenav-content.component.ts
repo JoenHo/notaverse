@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { RoomService } from '../../services/room.service';
 import { NoteService } from '../../services/note.service';
 import { ElementService } from '../../services/element.service';
+import { config } from 'src/app/config';
 
 @Component({
   selector: 'app-sidenav-content',
@@ -11,7 +12,6 @@ import { ElementService } from '../../services/element.service';
 })
 export class SidenavContentComponent implements OnInit{
   @Input() activeTab: any;
-  @Input() id: any;
   
   user: any = {};
   notes: any = [];
@@ -19,7 +19,7 @@ export class SidenavContentComponent implements OnInit{
   elements: any = [];
   active_room: string = '';
   active_note: string = '';
-  img_url_base: string = this.elementService.assets_url;
+  img_url_base: string = config.ASSETS_URL;
 
   /** Constructor */
   constructor(
@@ -31,9 +31,8 @@ export class SidenavContentComponent implements OnInit{
 
   /** OnInit hook */
   ngOnInit() {
-    this.userService.user.subscribe((data: any) => {
+    this.userService.getUser().subscribe((data: any) => {
       this.user = data;
-      console.log('user = ', this.user);
 
       // fetch room data
       this.fetchRoomData();
@@ -70,13 +69,6 @@ export class SidenavContentComponent implements OnInit{
         this.notes.push(data);
       });      
     });
-  }
-
-  /** fetch user data */
-  fetchUser() {
-    return this.userService.getUserById(this.id).subscribe((data: any) => {
-      this.user = data;
-    });        
   }
 
   /** set active room */
