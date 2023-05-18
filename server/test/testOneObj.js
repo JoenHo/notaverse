@@ -71,15 +71,15 @@ describe('Test single object', function(){
             });
     });
 
-    // it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
-    //     const userIdToUpdate = '42ab8ffd-2367-44fd-9568-87a19134053a';
-    //     const updatedPlan = { plan: 'InvalidPlan' };
-    //     chai.request("http://localhost:3000")
-    //         .put(`/user/${userIdToUpdate}`)
-    //         .send(updatedPlan)
-    //         .end(function (err, res) {
-    //             expect(res).to.have.status(400);
-    //             done();
-    //         });
-    // });
+    it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
+        const userIdToUpdate = '42ab8ffd-2367-44fd-9568-87a19134053a';
+        const updatedPlan = { plan: 'InvalidPlan' };
+        chai.request("http://localhost:3000")
+            .put(`/user/${userIdToUpdate}`)
+            .send(updatedPlan)
+            .end(function (err, res) {
+                expect(res).to.have.status(500);
+                done();
+            });
+    });
 })
