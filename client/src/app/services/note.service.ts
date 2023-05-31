@@ -33,13 +33,13 @@ export class NoteService {
     return this.http.post(config.SERVER_URL + '/note', body);
   }
 
-  updateNote(title: string, img_url: string, content: string) : Observable<any> {
+  updateNote(noteId: string, title: string, img_url: string, content: string) : Observable<any> {
     const body = {
       title: title,
       img_url: img_url,
       content: content
     }
-    return this.http.put(config.SERVER_URL + '/note', body);
+    return this.http.put(config.SERVER_URL + '/note/' + noteId, body);
   } 
 
   deleteNoteById(id: string) : Observable<any> {
