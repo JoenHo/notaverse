@@ -14,7 +14,7 @@
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-actions-position">
       <button mat-button (click)="onSubmit()">Save</button>
-      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="dialogRef.close(false)">Cancel</button>
       <button mat-button (click)="showConfirmationDialog()">Delete</button>
     </mat-dialog-actions>
 </div>

@@ -28,11 +28,13 @@ export class DialogComponent implements OnInit {
   }
 
   onSubmit() {
+    let refreshRequired = false;
     if (this.isNoteModified()) {
       // Send the updated note to the backend for update
       this.updateNote();
+      refreshRequired = true;
     }
-    this.dialogRef.close();
+    this.dialogRef.close(refreshRequired);
   }
 
   showConfirmationDialog(): void {
