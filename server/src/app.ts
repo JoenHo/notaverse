@@ -10,6 +10,7 @@ import noteRoutes from './routes/NoteRoutes';
 import roomRoutes from './routes/RoomRoutes';
 import roomItemRoutes from './routes/RoomItemRoutes';
 import elementRoutes from './routes/ElementRoutes';
+import authRoutes from './routes/AuthRoutes';
 
 class App {
 
@@ -46,6 +47,7 @@ class App {
         });
 
         /** Routes */
+        router.use('/auth', authRoutes);
         router.use('/user', userRoutes);
         router.use('/note', noteRoutes);
         router.use('/room', roomRoutes);
