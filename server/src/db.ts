@@ -14,8 +14,8 @@ class DataAccess {
     static connect (): Promise<mongoose.Connection> {
         if(this.mongooseInstance) return Promise.resolve(this.mongooseInstance);
         this.mongooseConnection  = mongoose.connection;
-        this.mongooseInstance = mongoose.connect(config.mongo.url); // Local URL
-        // this.mongooseInstance = mongoose.connect(config.mongo_atlas.url); // Atlas URL
+        // this.mongooseInstance = mongoose.connect(config.mongo.url); // Local URL
+        this.mongooseInstance = mongoose.connect(config.mongo_atlas.url); // Atlas URL
         return this.mongooseInstance;
     }
 }
