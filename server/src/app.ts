@@ -1,6 +1,10 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import session from 'express-session';
+import GooglePassport from './auth/google_passport';
 import userRoutes from './routes/UserRoutes';
 import noteRoutes from './routes/NoteRoutes';
 import roomRoutes from './routes/RoomRoutes';
@@ -10,9 +14,11 @@ import elementRoutes from './routes/ElementRoutes';
 class App {
 
     public expressApp: express.Application;
+    public googlePassport: GooglePassport;
 
     /** Constructor for App class */
     constructor() {
+        this.googlePassport = new GooglePassport();
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -20,8 +26,12 @@ class App {
 
     /** Configure Express middleware */
     private middleware(): void {
+        this.expressApp.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+        this.expressApp.use(cookieParser());
         this.expressApp.use(cors());
     }
 
