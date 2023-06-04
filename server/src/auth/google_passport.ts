@@ -16,12 +16,9 @@ class GooglePassport {
                 clientID: this.clientId,
                 clientSecret: this.secretId,
                 callbackURL: "/auth/google/callback"
-            }, (accessToken, refreshToken, profile, done) => {
-                console.log("inside new password google strategy");
+            }, (accessToken: any, refreshToken: any, profile: any, done: any) => {
+                console.log("Inside new password google strategy");
                 process.nextTick( () => {
-                    console.log('validating google profile:' + JSON.stringify(profile));
-                    console.log("userId:" + profile.id);
-                    console.log("displayName: " + profile.displayName);
                     return done(null, profile);
                 }); 
             }
