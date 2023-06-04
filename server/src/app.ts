@@ -27,7 +27,7 @@ class App {
 
     /** Configure Express middleware */
     private middleware(): void {
-        this.expressApp.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+        this.expressApp.use(session({ secret: 'very-very-secret-key', resave: true, saveUninitialized: true }));
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
         this.expressApp.use(bodyParser.json());
@@ -56,7 +56,7 @@ class App {
 
         /** Set static routes */
         router.use('/assets', express.static(__dirname + '/assets/element_imgs'));
-        router.use('/', express.static(__dirname+'/angularDist'));
+        router.use('', express.static(__dirname+'/../angularDist'));
 
         /** Health check */
         router.get('/ping', (req, res, next) => {

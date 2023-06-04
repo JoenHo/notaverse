@@ -20,7 +20,7 @@ class UserModel {
     public createSchema(): void {
         this.schema = new Schema({
             userId: {type: String, required: true, unique: true, alias: 'id'},
-            username: {type: String, required: true, unique: true},
+            oauthId: {type: String, required: true, unique: true},
             plan: {type: String, enum: Object.values(Subscription), default: Subscription.Basic, required: true},
             roomIdList: [{type: String, required: false}],
             noteIdList: [{type: String, required: false}],
