@@ -102,9 +102,15 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
         });
 }
 
+/** Retrieve user session from session */
+const getUserSession = (req: Request, res: Response, next: NextFunction) => {  
+    console.log('[INFO] User Session: ' + JSON.stringify(req.session));
+    res.json(req.session);
+};
 
 /** Define routes */
 const router = express.Router();
+router.get('/session', getUserSession);
 router.get('/', readAll);
 router.get('/:userId', readById);
 router.post('/', createUser);
