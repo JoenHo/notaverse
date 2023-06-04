@@ -22,6 +22,17 @@ const findById = (id: string): Promise<any> => {
         });
 }
 
+/** Retrieve one by OauthID */
+const findByOauthId = (id: string): Promise<any> => {
+    return userModel.model.findOne({oauthId: id})
+        .then((data: any) => {
+            return data;
+        })
+        .catch((err: any) => {
+            throw err;
+        });
+}
+
 /** Create new obj */
 const create = (obj: any): Promise<any> => {
     return userModel.model.create(obj)
@@ -55,4 +66,4 @@ const deleteById = (id: string): Promise<any> => {
         });
 }
 
-export const userController = {findAll, findById, create, updateById, deleteById};
+export const userController = {findAll, findById, create, updateById, deleteById, findByOauthId};
