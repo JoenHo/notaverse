@@ -1,5 +1,6 @@
 import express from 'express';
 import passport from 'passport';
+import {userController} from '../controllers/UserController';
 
 /** Authenticate with Google */
 const googleAuth = passport.authenticate('google', {scope: ['profile']});
@@ -15,9 +16,25 @@ const googleAuthCallback = (req: any, res: any, next: any) => {
       }  
       console.log("successfully authenticated user and returned to callback page.");
       console.log('user:', user);
-      
-      let user_id = '42ab8ffd-2367-44fd-9568-87a19134053a'; // TODO: Replace with actual user ID
-      res.redirect('/#/home/' + user_id);
+    
+      // find user in db
+      userController.findByOauthId(user.id)
+        .then((data: any) => {
+            if(data == null){
+                console.log('User with OauthID ' + user.id + ' not found in DB');
+                return res.redirect('/');
+            };
+            // store google profile in session
+            req.session.user = {
+                displayName: user.displayName,
+                profilePhoto: user.photos[0].value
+            };
+            // redirect to user home page 
+            return res.redirect('/#/home/' + data.userId);
+        }).catch((err:any) => {
+            console.log(err);
+            return res.redirect('/');
+        });
     })(req, res, next);
 };
 
