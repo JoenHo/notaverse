@@ -1,6 +1,6 @@
 [{
   "userId": "42ab8ffd-2367-44fd-9568-87a19134053a",
-  "username": "tamago",
+  "oauthId": "116435451995529359124",
   "plan": "Basic",
   "roomIdList": [
     "ff374908-74f0-4975-bf2b-d798f8892060",
@@ -12,5 +12,17 @@
     "3438bedf-29fa-49c8-aaeb-8cb7f555c4e4",
     "07b47b9e-b554-4ccb-814b-14268f429bda",
     "70634ed4-c8be-43d8-b379-7f8775fd48d4"
+  ]
+},
+{
+  "userId": "46cd2fed-5792-38je-1864-28o85734203c",
+  "oauthId": "102767186459308964760",
+  "plan": "Basic",
+  "roomIdList": [
+    "a01696e8-6398-4beb-82ae-ceb5cd85d395"
+  ],
+  "noteIdList": [
+    "550b2192-a024-4636-9881-47045057f0cd",
+    "ca20b0b9-e86c-43a8-b49b-d279b471b183"
   ]
 }]

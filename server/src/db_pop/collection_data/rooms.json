@@ -20,4 +20,17 @@
   "updatedAt": {
     "$date": "2023-05-14T19:59:24.319Z"
   }
+},
+{
+  "roomId": "a01696e8-6398-4beb-82ae-ceb5cd85d395",
+  "userId": "46cd2fed-5792-38je-1864-28o85734203c",
+  "name": "Kristoff's Room",
+  "roomItemIdList": [],
+  "createdAt": {
+    "$date": "2023-06-04T02:39:35.625Z"
+  },
+  "updatedAt": {
+    "$date": "2023-06-04T02:39:35.625Z"
+  },
+  "__v": 0
 }]
