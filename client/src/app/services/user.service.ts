@@ -8,6 +8,7 @@ import { config } from '../config';
 })
 export class UserService {
   private user: any;
+  private userSessionInfo: any;
 
   constructor(private http: HttpClient) { }
 
@@ -23,4 +24,15 @@ export class UserService {
     return this.user;
   }
 
+  getUserSessionFromServer() : Observable<any> {
+    return this.http.get(config.SERVER_URL + '/user/session');
+  }
+
+  setUserSession() {
+    this.userSessionInfo = this.getUserSessionFromServer();
+  }
+
+  getUserSession() {
+    return this.userSessionInfo;
+  }
 }

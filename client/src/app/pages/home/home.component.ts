@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
     this.route.params.subscribe(params => {
       var userId = params['userId'];
       // set user in user service
-      this.userService.setUser(userId)
+      this.userService.setUser(userId);
+      // set user profile in user service
+      this.userService.setUserSession();
     });
   }
 
