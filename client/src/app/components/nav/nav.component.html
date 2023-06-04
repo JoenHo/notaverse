@@ -4,6 +4,16 @@
             <img src="../../assets/notaverse-logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
             Notaverse
         </a>
-        <div class="account-info" *ngIf="user?.username">Hello {{user?.username}}</div>
+        <button class="avatar-button" *ngIf="user && userSessionInfo" [matMenuTriggerFor]="beforeMenu">
+            <img [src]="userSessionInfo?.user?.profilePhoto" class="rounded-circle" height="35px"/>
+        </button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item disabled=true style="color: inherit">
+                <mat-icon class="" aria-label="ACCOUNT">account_circle</mat-icon><b>{{ userSessionInfo?.user?.displayName }}</b>
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon class="" aria-label="LOGOUT">logout</mat-icon>Logout
+            </button>
+        </mat-menu>
     </div>
 </nav>
