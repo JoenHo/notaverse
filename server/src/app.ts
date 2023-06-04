@@ -56,7 +56,7 @@ class App {
 
         /** Set static routes */
         router.use('/assets', express.static(__dirname + '/assets/element_imgs'));
-        router.use('/', express.static(__dirname+'/angularDist'));
+        router.use('', express.static(__dirname+'/angularDist'));
 
         /** Health check */
         router.get('/ping', (req, res, next) => {
