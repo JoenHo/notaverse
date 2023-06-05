@@ -3,7 +3,7 @@ import passport from 'passport';
 import {userController} from '../controllers/UserController';
 
 /** Authenticate with Google */
-const googleAuth = passport.authenticate('google', {scope: ['profile']});
+const googleAuth = passport.authenticate('google', {scope: ['profile', 'email']});
 
 /** Google callback URL */
 const googleAuthCallback = (req: any, res: any, next: any) => {
@@ -26,6 +26,8 @@ const googleAuthCallback = (req: any, res: any, next: any) => {
             };
             // store google profile in session
             req.session.user = {
+                oauthId: user.id,
+                email: user.emails[0].value,
                 displayName: user.displayName,
                 profilePhoto: user.photos[0].value
             };
