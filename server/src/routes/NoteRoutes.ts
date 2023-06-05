@@ -108,4 +108,4 @@ router.get('/:noteId', readById);
 router.post('/:userId', createNote);
 router.put('/:noteId', updateNote);
 router.delete('/:noteId', deleteNote);
-export = router;
+export default router;

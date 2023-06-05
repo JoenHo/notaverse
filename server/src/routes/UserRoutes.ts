@@ -116,4 +116,4 @@ router.get('/:userId', readById);
 router.post('/', createUser);
 router.put('/:userId', updateUser);
 router.delete('/:userId', deleteUser);
-export = router;
+export default router;
