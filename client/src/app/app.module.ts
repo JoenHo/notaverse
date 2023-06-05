@@ -18,6 +18,7 @@ import { ElementService } from './services/element.service';
 import { NoteService } from './services/note.service';
 import { PriceComponent } from './pages/price/price.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { CreateComponent } from './components/create/create.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     RoomComponent,
     PriceComponent,
     MainComponent,
-    DialogComponent
+    DialogComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,14 +39,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [
-    UserService,
-    RoomService,
-    ElementService,
-    NoteService
-  ],
-  bootstrap: [AppComponent]
+  providers: [UserService, RoomService, ElementService, NoteService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,32 @@
+<div class="dialog-container">
+  <mat-dialog-content>
+    <div class="note-header">
+      <mat-select
+        class="note-img-select"
+        [(value)]="note.img_url"
+        placeholder="Select an image"
+      >
+        <mat-option *ngFor="let element of elements" [value]="element.img_url">
+          <img
+            [src]="img_url_base + element.img_url"
+            [width]="45"
+            [height]="45"
+          />
+        </mat-option>
+      </mat-select>
+      <input class="note-title" [(ngModel)]="note.title" placeholder="Title" />
+    </div>
+    <div>
+      <textarea
+        class="note-text"
+        rows="13"
+        [(ngModel)]="note.content"
+        placeholder="Content"
+      ></textarea>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions-position">
+    <button mat-button (click)="onSubmit()">Save</button>
+    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+  </mat-dialog-actions>
+</div>
