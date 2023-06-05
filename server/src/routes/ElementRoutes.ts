@@ -69,4 +69,4 @@ router.get('/:elementId', readById);
 router.post('/', createElement);
 router.put('/:elementId', updateElement);
 router.delete('/:elementId', deleteElement);
-export = router;
+export default router;
