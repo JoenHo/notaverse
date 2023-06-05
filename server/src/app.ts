@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response}  from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -36,6 +36,13 @@ class App {
         this.expressApp.use(cors());
     }
 
+    /** Validate User Authentication */
+    private validateAuth(req: Request, res: Response, next: NextFunction):void {
+        if (req.isUnauthenticated()) { console.log("user is authenticated"); return next(); }
+        console.log("user is not authenticated");
+        res.redirect('/');
+    }
+
     /** Configure API endpoints */
     private routes(): void {
         let router = express.Router();
@@ -48,11 +55,11 @@ class App {
 
         /** Routes */
         router.use('/auth', authRoutes);
-        router.use('/user', userRoutes);
-        router.use('/note', noteRoutes);
-        router.use('/room', roomRoutes);
-        router.use('/roomItem', roomItemRoutes);
-        router.use('/element', elementRoutes);
+        router.use('/user', this.validateAuth, userRoutes);
+        router.use('/note', this.validateAuth, noteRoutes);
+        router.use('/room', this.validateAuth, roomRoutes);
+        router.use('/roomItem', this.validateAuth, roomItemRoutes);
+        router.use('/element', this.validateAuth, elementRoutes);
 
         /** Set static routes */
         router.use('/assets', express.static(__dirname + '/assets/element_imgs'));

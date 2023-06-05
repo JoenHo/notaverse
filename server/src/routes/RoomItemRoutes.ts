@@ -102,4 +102,4 @@ router.get('/:roomItemId', readById);
 router.post('/:roomId', createRoomItem);
 router.put('/:roomItemId', updateRoomItem);
 router.delete('/:roomItemId', deleteRoomItem);
-export = router;
+export default router;

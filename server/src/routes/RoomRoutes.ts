@@ -118,4 +118,4 @@ router.get('/:roomId', readById);
 router.post('/:userId', createRoom);
 router.put('/:roomId', updateRoom);
 router.delete('/:roomId', deleteRoom);
-export = router;
+export default router;

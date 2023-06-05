@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node dist/server.js",
+    "copy-assets": "cp -R src/assets dist",
+    "start": "npm run build && npm run copy-assets && node dist/server.js",
     "test": "mocha './test/*.js'"
   },
   "keywords": [],
