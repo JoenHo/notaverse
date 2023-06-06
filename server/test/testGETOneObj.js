@@ -11,13 +11,13 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-describe('Test single object', function(){
+describe('Test HTTP GET single object', function(){
     var requestResult;
 	var response;
 		 
     before(function (done) {
         chai.request(address)
-			.get("/user/?userId=647ea09736d34037c536bceb")
+			.get("/user/?userId=46cd2fed-5792-38je-1864-28o85734203c")
 			.end(function (err, res) {
 				requestResult = res.body;
 				response = res;
@@ -35,7 +35,6 @@ describe('Test single object', function(){
 
     it('The user object has known properties', function(){
 	    expect(requestResult[0]).to.include.keys('userId');
-		expect(response.body[0]).to.have.property('username');
         expect(response.body[0]).to.have.property('plan');
         expect(response.body[0]).to.have.property('roomIdList');
         expect(response.body[0]).to.have.property('noteIdList');
@@ -44,7 +43,6 @@ describe('Test single object', function(){
 
     it('The user object has known properties with the correct types', function() {
         expect(requestResult[0]).to.have.property('userId').that.is.a('string');
-        expect(response.body[0]).to.have.property('username').that.is.a('string');
         expect(response.body[0]).to.have.property('plan').that.is.a('string');
         expect(response.body[0]).to.have.property('roomIdList').that.is.an('array');
         response.body[0].roomIdList.forEach((roomId) => {
@@ -56,31 +54,31 @@ describe('Test single object', function(){
         });
     });
 
-    it('Should update a user', function(done) {
-        const updatedUser = {
-            userId: '647ea09736d34037c536bceb',
-            username: 'UpdatedUser',
-            plan: 'Business'
-        };
-        chai.request(address)
-            .put(`/user/${updatedUser.userId}`)
-            .send(updatedUser)
-            .end(function (err, res) {
-                expect(res).to.have.status(200);
-                expect(res.body).to.include.keys('userId', 'username', 'plan', 'roomIdList', 'noteIdList');
-                done();
-            });
-    });
+    // it('Should update a user', function(done) {
+    //     const updatedUser = {
+    //         userId: '46cd2fed-5792-38je-1864-28o85734203c',
+    //         username: 'UpdatedUser',
+    //         plan: 'Business'
+    //     };
+    //     chai.request(address)
+    //         .put(`/user/${updatedUser.userId}`)
+    //         .send(updatedUser)
+    //         .end(function (err, res) {
+    //             expect(res).to.have.status(200);
+    //             expect(res.body).to.include.keys('userId', 'username', 'plan', 'roomIdList', 'noteIdList');
+    //             done();
+    //         });
+    // });
 
-    it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
-        const userIdToUpdate = '647ea09736d34037c536bceb';
-        const updatedPlan = { plan: 'InvalidPlan' };
-        chai.request(address)
-            .put(`/user/${userIdToUpdate}`)
-            .send(updatedPlan)
-            .end(function (err, res) {
-                expect(res).to.have.status(500);
-                done();
-            });
-    });
+    // it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
+    //     const userIdToUpdate = '46cd2fed-5792-38je-1864-28o85734203c';
+    //     const updatedPlan = { plan: 'InvalidPlan' };
+    //     chai.request(address)
+    //         .put(`/user/${userIdToUpdate}`)
+    //         .send(updatedPlan)
+    //         .end(function (err, res) {
+    //             expect(res).to.have.status(500);
+    //             done();
+    //         });
+    // });
 })

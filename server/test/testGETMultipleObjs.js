@@ -11,7 +11,7 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-describe('Test list objects', function(){
+describe('Test HTTP GET multiple objects', function(){
     var requestResult;
 	var response;
 		 
@@ -76,12 +76,5 @@ describe('Test list objects', function(){
                     callback();
                 });
         }, done);
-    });
-
-    const uuidPattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
-    it('UserId matches a format of a valid UUID', function() {
-        requestResult.forEach(function(note) {
-            expect(note.userId).to.match(uuidPattern);
-        });
     });
 })

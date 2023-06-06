@@ -11,13 +11,13 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-describe('Test single object', function(){
+describe('Test HTTP POST', function(){
     var requestResult;
 	var response;
 		 
     before(function (done) {
         chai.request(address)
-			.get("/user/?userId=647ea09736d34037c536bceb")
+			.get("/user")
 			.end(function (err, res) {
 				requestResult = res.body;
 				response = res;
@@ -30,8 +30,6 @@ describe('Test single object', function(){
 
     it('Should refuse to create a new user with an invalid plan', function(done) {
         const newUser = {
-            //userId: 'newUserId',
-            username: 'NewUser',
             plan: 'InvalidPlan'
         };
         chai.request(address)
