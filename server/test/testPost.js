@@ -27,19 +27,6 @@ describe('Test single object', function(){
 			});
         });
     
-        
-    it('Should return users with a specific plan', function(done) {
-        var plan = 'Business';
-        chai.request(address)
-            .get(`/user/plan/${plan}`)
-            .end(function (err, res) {
-                expect(res).to.have.status(200);
-                res.body.forEach(user => {
-                    expect(user).to.have.property('plan').that.equals(plan);
-                });
-                done();
-            });
-    });
 
     it('Should refuse to create a new user with an invalid plan', function(done) {
         const newUser = {

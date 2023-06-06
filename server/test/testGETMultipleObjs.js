@@ -9,13 +9,14 @@ var should = chai.should();
 var http = require('http');
 const { describe } = require('node:test');
 chai.use(chaiHttp);
+var address = 'https://ntverse.azurewebsites.net'
 
 describe('Test list objects', function(){
     var requestResult;
 	var response;
 		 
     before(function (done) {
-        chai.request("http://localhost:3000")
+        chai.request(address)
 			.get("/note")
 			.end(function (err, res) {
 				requestResult = res.body;
@@ -67,7 +68,7 @@ describe('Test list objects', function(){
 
     it('Every note has an associated User', function(done) {
         async.each(requestResult, function(note, callback) {
-            chai.request("http://localhost:3000")
+            chai.request(address)
                 .get(`/user/${note.userId}`)
                 .end(function (err, res) {
                     expect(err).to.be.null;

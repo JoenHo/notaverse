@@ -9,14 +9,15 @@ var should = chai.should();
 var http = require('http');
 const { describe } = require('node:test');
 chai.use(chaiHttp);
+var address = 'https://ntverse.azurewebsites.net'
 
 describe('Test single object', function(){
     var requestResult;
 	var response;
 		 
     before(function (done) {
-        chai.request("http://localhost:3000")
-			.get("/user/?userId=42ab8ffd-2367-44fd-9568-87a19134053a")
+        chai.request(address)
+			.get("/user/?userId=647ea09736d34037c536bceb")
 			.end(function (err, res) {
 				requestResult = res.body;
 				response = res;
@@ -61,7 +62,7 @@ describe('Test single object', function(){
             username: 'UpdatedUser',
             plan: 'Business'
         };
-        chai.request("http://localhost:3000")
+        chai.request(address)
             .put(`/user/${updatedUser.userId}`)
             .send(updatedUser)
             .end(function (err, res) {
@@ -74,7 +75,7 @@ describe('Test single object', function(){
     it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
         const userIdToUpdate = '42ab8ffd-2367-44fd-9568-87a19134053a';
         const updatedPlan = { plan: 'InvalidPlan' };
-        chai.request("http://localhost:3000")
+        chai.request(address)
             .put(`/user/${userIdToUpdate}`)
             .send(updatedPlan)
             .end(function (err, res) {
