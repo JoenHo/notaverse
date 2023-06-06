@@ -24,13 +24,13 @@ export class NoteService {
     return this.http.get(config.SERVER_URL + '/note/' + id);
   }
 
-  createNote(title: string, img_url: string, content: string) : Observable<any> {
+  createNote(userId: string, title: string, img_url: string, content: string) : Observable<any> {
     const body = {
       title: title,
       img_url: img_url,
       content: content
     }
-    return this.http.post(config.SERVER_URL + '/note', body);
+    return this.http.post(config.SERVER_URL + '/note/' + userId, body);
   }
 
   updateNote(noteId: string, title: string, img_url: string, content: string) : Observable<any> {
