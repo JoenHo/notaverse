@@ -1,7 +1,28 @@
-<div>
-    <div class="room-container">
+<div class="room">
+    <div class="room-default-container" *ngIf="!room">
+        <div class="guidance-container">
+            <h1><b>Welcome to Notaverse!</b></h1><br>
+            <h2>To get started, try the following from open the sidebar.</h2><br>
+            <div class="guidance-block">
+                <div class="guidance-block-item">
+                    <mat-icon class="icon-display" aria-label="ROOMS">settings_overscan</mat-icon>
+                    <h2>Create a room</h2>    
+                </div>
+                <div class="guidance-block-item">
+                    <mat-icon class="icon-display" aria-label="ELEMENTS">extension</mat-icon>
+                    <h2>Decorate your room by drag & drop the elements</h2>
+                </div>
+                <div class="guidance-block-item">
+                    <mat-icon class="icon-display" aria-label="ITEMS">folder_open</mat-icon>
+                    <h2>View and edit your items</h2>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="room-container" *ngIf="room">
         <div *ngIf="room">
             <div>
+                <h1><b>Coming Soon ... </b></h1>
                 <h1> Display "{{room?.name}}" Content </h1>
             </div>
         </div>
