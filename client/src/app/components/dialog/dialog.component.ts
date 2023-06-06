@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoteService } from '../../services/note.service';
-
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { config } from 'src/app/config';
 
 @Component({
@@ -18,6 +18,7 @@ export class DialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DialogComponent>,
+    private dialog: MatDialog,
     private noteService: NoteService
   ) {}
 
@@ -39,6 +40,20 @@ export class DialogComponent implements OnInit {
 
   showConfirmationDialog(): void {
     // Show the confirmation dialog for deletion
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: { message: 'Are you sure you want to delete?' }
+    });
+  
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result===true) {
+        // delete
+        this.noteService.deleteNoteById(this.note.noteId).subscribe((res: any) => {
+          let refreshRequired = true;
+          this.dialogRef.close(refreshRequired);
+        })
+      }
+    });
   }
 
   updateNote() {
