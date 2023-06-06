@@ -1,6 +1,9 @@
 <div class="sidenav-content">
     <div class="room-list" *ngIf="activeTab==='room'">
-      <h3>Rooms</h3>
+      <div style="display: flex; justify-content: space-between;">
+        <h3 style="margin-right: auto;">Rooms</h3>
+        <div (click)="onCreateRoom()" style="cursor: pointer;"><mat-icon>add_box</mat-icon></div>
+      </div>
       <p *ngIf="rooms?.length===0">No rooms</p>
       <div class="room-boxes">
         <div *ngFor="let room of rooms">
@@ -13,7 +16,7 @@
         <h3>Elements</h3>
         <div class="element-boxes">
           <div *ngFor="let element of elements">
-            <div class="element-box" [style.background-image]="'url(' + img_url_base + element?.img_url + ')'">
+            <div class="element-box" [style.background-image]="'url(' + img_url_base + element?.img_url + ')'" draggable="true">
             </div>
           </div>
         </div>
