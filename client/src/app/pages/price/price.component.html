@@ -1,5 +1,5 @@
 <app-nav></app-nav>
-<div class="price-plans">
+<div class="price-plans-container">
   <div class="price-plan" *ngFor="let plan of plans">
     <div class="plan-details">
       <h2 class="plan-name">{{ plan.name }}</h2>
@@ -8,6 +8,7 @@
         <li *ngFor="let feature of plan.features">{{ feature }}</li>
       </ul>
     </div>
+    <br>
     <button class="subscribe-button" (click)="subscribe(plan.name)">
       Subscribe
     </button>
