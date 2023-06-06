@@ -1,6 +1,55 @@
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .room-container {
-    width: calc(100vw - 70px);
-    height: calc(100vh - 60px);
-    background-color: #d2d2d2;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: calc(100vw - 70px);
+  height: calc(100vh - 60px);
+  background-color: #d2d2d2;
+}
+
+.room-default-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 70px);
+  height: calc(100vh - 60px);
+  background-color: #696969;
+  color: #e3e0e0;
+}
+
+.guidance-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+  height: 50%;
+  border: solid 2px #aaaaaa;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.guidance-block {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  padding: 0;
+}
+
+.guidance-block-item {
+  width: 30%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.icon-display {
+  transform: scale(1);
+}

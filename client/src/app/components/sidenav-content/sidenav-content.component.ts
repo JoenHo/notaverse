@@ -86,8 +86,14 @@ export class SidenavContentComponent implements OnInit{
 
   /** set active room */
   onRoomClick(room: any) {
-    this.roomService.setActiveRoom(room);
-    this.active_room = room.roomId;
+    if (this.active_room === room?.roomId) {
+      // Reset the active room
+      this.roomService.setActiveRoom(null);
+      this.active_room = '';
+    } else {
+      this.roomService.setActiveRoom(room);
+      this.active_room = room?.roomId;
+    }
   }
 
   /** set active note */
@@ -112,7 +118,7 @@ export class SidenavContentComponent implements OnInit{
     });  
   }
 
-  /**  */
+  /** Open dialog to create note */
   onCreateNote() {
     // open dialog
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -129,6 +135,11 @@ export class SidenavContentComponent implements OnInit{
         this.fetchUserData();      
       }
     }); 
+  }
+
+  /** Open dialog to create room */
+  onCreateRoom() {
+
   }
 
 }
