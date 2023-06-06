@@ -4,7 +4,8 @@
       <mat-select
         class="note-img-select"
         [(value)]="note.img_url"
-        placeholder="Select an image"
+        [style.background-image]="'url(' + img_url_base + note.img_url + ')'"
+        single
       >
         <mat-option *ngFor="let element of elements" [value]="element.img_url">
           <img
@@ -14,19 +15,18 @@
           />
         </mat-option>
       </mat-select>
-      <input class="note-title" [(ngModel)]="note.title" placeholder="Title" />
+      <input class="note-title" [(ngModel)]="note.title" />
     </div>
     <div>
       <textarea
         class="note-text"
         rows="13"
         [(ngModel)]="note.content"
-        placeholder="Content"
       ></textarea>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions class="dialog-actions-position">
-    <button mat-button (click)="onSubmit()">Save</button>
-    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+    <button mat-button (click)="onSubmit()">Create</button>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
   </mat-dialog-actions>
 </div>
