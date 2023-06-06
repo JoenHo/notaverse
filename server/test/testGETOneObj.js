@@ -58,7 +58,7 @@ describe('Test single object', function(){
 
     it('Should update a user', function(done) {
         const updatedUser = {
-            userId: '42ab8ffd-2367-44fd-9568-87a19134053a',
+            userId: '647ea09736d34037c536bceb',
             username: 'UpdatedUser',
             plan: 'Business'
         };
@@ -73,7 +73,7 @@ describe('Test single object', function(){
     });
 
     it('Should reject updating a user plan to a value not in the Subscription enum', function(done) {
-        const userIdToUpdate = '42ab8ffd-2367-44fd-9568-87a19134053a';
+        const userIdToUpdate = '647ea09736d34037c536bceb';
         const updatedPlan = { plan: 'InvalidPlan' };
         chai.request(address)
             .put(`/user/${userIdToUpdate}`)
