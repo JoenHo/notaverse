@@ -97,7 +97,7 @@ export class SidenavContentComponent implements OnInit{
 
     // open dialog
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {noteData: note, elements: this.elements},
+      data: {type:'update', noteData: note, elements: this.elements, userId: this.user.userId},
       width: '80vw',
       height: '80vh'
     });
@@ -110,6 +110,25 @@ export class SidenavContentComponent implements OnInit{
         this.fetchUserData();      
       }
     });  
+  }
+
+  /**  */
+  onCreateNote() {
+    // open dialog
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {type:'create', noteData: null, elements: this.elements, userId: this.user.userId},
+      width: '80vw',
+      height: '80vh'
+    });
+
+    // logic after dialog is closed
+    dialogRef.afterClosed().subscribe((refreshRequired) => {
+      this.active_note = '';
+      if(refreshRequired == true){
+        this.userService.setUser(this.user.userId);
+        this.fetchUserData();      
+      }
+    }); 
   }
 
 }

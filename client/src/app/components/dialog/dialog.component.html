@@ -6,7 +6,7 @@
             <img [src]="img_url_base + element.img_url" [width]="45" [height]="45">
           </mat-option>
         </mat-select>
-        <input class="note-title" [(ngModel)]="note.title">
+        <input class="note-title" placeholder="Title" [(ngModel)]="note.title">
       </div>
       <div>
         <textarea class="note-text" rows="13" [(ngModel)]="note.content"></textarea>

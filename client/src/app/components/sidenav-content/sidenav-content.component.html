@@ -20,7 +20,10 @@
     </div>
   
     <div class="item-list" *ngIf="activeTab==='item'">
-      <h3>Notes</h3>
+      <div style="display: flex; justify-content: space-between;">
+        <h3 style="margin-right: auto;">Notes</h3>
+        <div (click)="onCreateNote()" style="cursor: pointer;"><mat-icon>add_box</mat-icon></div>
+      </div>
       <p *ngIf="notes?.length===0">No notes</p>
       <div class="note-boxes">
         <div *ngFor="let note of notes">
