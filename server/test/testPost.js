@@ -12,7 +12,6 @@ chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
 var newUser = { oauthId: '123', plan: 'Business' };
-var updatedUser = { plan: 'Enterprise' }; 
 
 describe('Test User Lifecycle', function() {
     var createdUser;
