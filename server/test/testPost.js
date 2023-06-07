@@ -11,25 +11,6 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-// describe('Test HTTP POST', function(){
-//     var requestResult;
-// 	var response;
-		 
-//     before(function (done) {
-//         chai.request(address)
-// 			.get("/user")
-// 			.end(function (err, res) {
-// 				requestResult = res.body;
-// 				response = res;
-//                 expect(err).to.be.null;
-//                 expect(res).to.have.status(200);
-// 				done();
-// 			});
-//         });
-    
-
-
-
 var newUser = { oauthId: '123', plan: 'Business' };  // Adjust this according to your needs
 var updatedUser = { plan: 'Enterprise' };  // Adjust this according to your needs
 
