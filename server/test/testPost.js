@@ -30,6 +30,7 @@ describe('Test User Lifecycle', function() {
 
     it('Should refuse to create a new user with an invalid plan', function(done) {
         const newUser = {
+            oauthId: '456',
             plan: 'InvalidPlan'
         };
         chai.request(address)
