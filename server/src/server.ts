@@ -13,7 +13,7 @@ DataAccess.connect().then(() => {
 /** Start Express App */
 const startServer = () => {
     let server: any = new App().expressApp;
-    server.listen(config.server.port, () => {
+    server.listen(process.env.port || config.server.port, () => {
         console.log(`Server is running on port ${config.server.port}\n`);
     });
 };
