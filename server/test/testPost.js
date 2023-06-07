@@ -11,22 +11,42 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-describe('Test HTTP POST', function(){
-    var requestResult;
-	var response;
+// describe('Test HTTP POST', function(){
+//     var requestResult;
+// 	var response;
 		 
-    before(function (done) {
-        chai.request(address)
-			.get("/user")
-			.end(function (err, res) {
-				requestResult = res.body;
-				response = res;
-                expect(err).to.be.null;
-                expect(res).to.have.status(200);
-				done();
-			});
-        });
+//     before(function (done) {
+//         chai.request(address)
+// 			.get("/user")
+// 			.end(function (err, res) {
+// 				requestResult = res.body;
+// 				response = res;
+//                 expect(err).to.be.null;
+//                 expect(res).to.have.status(200);
+// 				done();
+// 			});
+//         });
     
+
+
+
+var newUser = { oauthId: '123', plan: 'Business' };  // Adjust this according to your needs
+var updatedUser = { plan: 'Enterprise' };  // Adjust this according to your needs
+
+describe('Test User Lifecycle', function() {
+    var createdUser;
+
+    it('Should create a new user', function(done) {
+        chai.request(address)
+            .post('/user')
+            .send(newUser)
+            .end(function(err, res) {
+                expect(res).to.have.status(200);
+                createdUser = res.body;
+                expect(createdUser).to.include(newUser);
+                done();
+            });
+    });
 
     it('Should refuse to create a new user with an invalid plan', function(done) {
         const newUser = {
@@ -40,4 +60,14 @@ describe('Test HTTP POST', function(){
                 done();
             });
     }); 
-})
+
+
+    it('Should delete the user', function(done) {
+        chai.request(address)
+            .delete(`/user/${createdUser.userId}`)
+            .end(function(err, res) {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
