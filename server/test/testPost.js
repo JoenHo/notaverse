@@ -11,8 +11,8 @@ const { describe } = require('node:test');
 chai.use(chaiHttp);
 var address = 'https://ntverse.azurewebsites.net'
 
-var newUser = { oauthId: '123', plan: 'Business' };  // Adjust this according to your needs
-var updatedUser = { plan: 'Enterprise' };  // Adjust this according to your needs
+var newUser = { oauthId: '123', plan: 'Business' };
+var updatedUser = { plan: 'Enterprise' }; 
 
 describe('Test User Lifecycle', function() {
     var createdUser;
